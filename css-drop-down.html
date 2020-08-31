@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .navbar {
+        }
+        .navbar > div {
+            display: inline-block;
+            position: relative;
+            border: 1px solid black;
+			width: 50px;
+        }
+		 .navbar > li {
+            display: inline-block;
+            position: relative;
+            border: 1px solid black;
+			width: 50px;
+        }
+        .navbar ol {
+            display: none;
+            position: absolute;
+            left: 0px;
+			right: 0px;
+            top: 10px;
+			bottom: 0px;
+            padding: 0;
+        }
+        .navbar > div:hover ol{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            File
+            <ol>
+                <li>Open</li>
+                <li>Save</li>
+                <li>Print</li>
+                <li>Exit</li>
+            </ol>
+        </div>
+        <div>
+            Edit
+            <ol>
+                <li>Copy</li>
+                <li> Cut</li>
+                <li> Paste</li>
+                <li> Format</li>
+            </ol>
+        </div>
+        <div>
+            Help
+            <ol>
+                <li>About</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
