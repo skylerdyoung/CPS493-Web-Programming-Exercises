@@ -15,7 +15,7 @@
     <div class="login" >
     <div class="field">
   <p class="control has-icons-left has-icons-right">
-    <input class="input" type="username" placeholder="Username">
+    <input class="input" type="username" placeholder="@Username">
     <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>

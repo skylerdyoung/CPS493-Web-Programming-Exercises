@@ -244,7 +244,7 @@
 
           
         <footer class="card-footer">           
-              <a href="#" class="card-footer-item"> + Add User</a>
+              <a href="/adduser" class="card-footer-item"> + Add User</a>
         </footer>
 
         </div>

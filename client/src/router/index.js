@@ -42,6 +42,11 @@ const routes = [
     path: '/addexercise',
     name: 'Add Exercise',
     component: () => import(/* webpackChunkName: "addexercise" */ '../views/Addexercise.vue')
+  },
+  {
+    path: '/adduser',
+    name: 'Add User',
+    component: () => import(/* webpackChunkName: "adduser" */ '../views/Adduser.vue')
   }
 ]
 

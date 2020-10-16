@@ -1,31 +1,26 @@
 <template>
-    <article class="message is-white" id="signupbox">
+  <div class="adduser" id="adduserbox">
 
-  <div class="message-body">
+      
+    <article class="message is-link" id="sub-box" >
+  
+        <div class="message-header">
+          Add User
+        </div>
 
-    <div class="card">
+        <div class="message-body">
 
-    <div class="card-content">
-
-    <h4>Sign Up:</h4>
-
-    <br>
-
-    <div class="login" >
-    <div class="field">
-
-  <p class="control has-icons-left has-icons-right">
+      <div class="field">
+  <p class="control has-icons-left">
     <input class="input" type="username" placeholder="@Username">
     <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
+      <i class="fas fa-lock"></i>
     </span>
   </p>
 </div>
 
-<div class="field">
+
+        <div class="field">
   <p class="control has-icons-left">
     <input class="input" type="fname" placeholder="First Name">
     <span class="icon is-small is-left">
@@ -70,20 +65,20 @@
   </p>
 </div>
 
-<div class="field">
-  <p class="control has-text-centered">
-    <button class="button is-info">
-      Sign Up
-    </button>
-  </p>
-</div>
+
+        <footer class="card-footer">
+              <a href="userspage" class="card-footer-item">Submit</a>
+            <a href="userspage" class="card-footer-item">Cancel</a>
+        </footer>  
+
+
+
+ 
+    </div>
+
+    </article>
+
   </div>
-
-    </div>
-    </div>
-
-</div>
-</article>
 </template>
 
 <script>
@@ -94,12 +89,16 @@ export default {
 
 <style>
 
- #signupbox{
+#adduserbox{
     margin:auto;
-    width: 33.3%;
+    width: 50%;
     padding-top: 2.5%;
     padding-bottom: 2.5%;
     background-color: white;
   }
+
+#sub-box{
+    background-color: white;
+}
 
 </style>
