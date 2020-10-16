@@ -1,16 +1,29 @@
+
+
 <template>
+
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/exercises">Exercises</router-link> |
-      <router-link to="/userspage">Users</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Sign Up</router-link> 
-    </div>
+    <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <Nav />
+
     <router-view/>
   </div>
 </template>
+
+<script>
+  import Nav from "@/components/Nav";
+
+  export default {
+    components: {
+      Nav
+    }
+
+  }
+</script>
 
 <style lang="scss">
 #app {
@@ -33,4 +46,5 @@
     }
   }
 }
+
 </style>
