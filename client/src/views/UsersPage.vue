@@ -4,7 +4,7 @@
     <article class="message is-link" id="sub-box" >
   
       <div class="message-header">
-        <p>Currently Online</p>
+        <p>Admin Panel</p>
       </div>
 
       <div class="message-body">

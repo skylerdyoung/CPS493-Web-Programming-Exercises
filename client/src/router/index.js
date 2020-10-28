@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import session from '../models/session'
 import Home from '../views/Home.vue'
-
+import Login from '../views/Login.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: checkSessionUser
   },
   {
     path: '/about',
@@ -21,17 +23,19 @@ const routes = [
   {
     path: '/exercises',
     name: 'Exercises',
-    component: () => import(/* webpackChunkName: "exercises" */ '../views/Exercises.vue')
+    component: () => import(/* webpackChunkName: "exercises" */ '../views/Exercises.vue'),
+    beforeEnter: checkSessionUser
   },
   {
     path: '/userspage',
     name: 'Admin',
-    component: () => import(/* webpackChunkName: "userspage" */ '../views/UsersPage.vue')
+    component: () => import(/* webpackChunkName: "userspage" */ '../views/UsersPage.vue'),
+    beforeEnter: checkSessionUserAdmin
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+    component: Login
   },
   {
     path: '/signup',
@@ -57,3 +61,25 @@ const router = new VueRouter({
 })
 
 export default router
+
+
+function checkSessionUser (to, from, next) {
+  if(session.user){
+    next();
+  }else{
+    next('Login');
+  }
+}
+
+function checkSessionUserAdmin (to, from, next) {
+  if(session.user){
+    if(session.user.user == 'admin'){
+      next();
+    }
+    else{
+     alert("error: permission denied\n" + "(see models/users.js for admin)");
+    }
+  }else{
+    next('Login');
+  }
+}

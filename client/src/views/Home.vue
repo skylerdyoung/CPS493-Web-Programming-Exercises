@@ -17,21 +17,16 @@
            <div class="media">
            <div class="media-left">
           <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          <img :src="session.user.image">
           </figure>
           </div>
           <div class="media-content">
-           <p class="title is-4">John Smith</p>
-           <p class="subtitle is-6">@johnsmith</p>
+           <p class="title is-4">{{session.user.name}}</p>
+           <p class="subtitle is-6">@{{session.user.user}}</p>
           </div>
          </div>
 
          <div class="content">
-           
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris. 
-          
-            <br>
 
           </div>
 
@@ -72,7 +67,14 @@
 </template>
 
 <script>
+
+  import session from "@/models/session";
+
+
 export default {
+    data: ()=> ({
+        session
+  })
 
 }
 </script>

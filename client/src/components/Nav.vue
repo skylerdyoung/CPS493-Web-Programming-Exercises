@@ -22,7 +22,7 @@
           <router-link to="/signup" class="button is-info">
             <strong>Sign up</strong>
           </router-link>
-          <router-link to="/login" class="button is-light">
+          <router-link to='/login' class='button is-light'>
             Log in
           </router-link>
         </div>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+
 export default {
 
 }

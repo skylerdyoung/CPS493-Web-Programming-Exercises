@@ -15,7 +15,7 @@
     <div class="login" >
     <div class="field">
   <p class="control has-icons-left has-icons-right">
-    <input class="input" type="username" placeholder="@Username">
+    <input class="input" type="username" id="username" placeholder="Username">
     <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>
@@ -26,7 +26,7 @@
 </div>
 <div class="field">
   <p class="control has-icons-left">
-    <input class="input" type="password" placeholder="Password">
+    <input class="input" type="password" id="password" placeholder="Password">
     <span class="icon is-small is-left">
       <i class="fas fa-lock"></i>
     </span>
@@ -34,7 +34,7 @@
 </div>
 <div class="field">
   <p class="control has-text-centered">
-    <button class="button is-info">
+    <button class="button is-info" @click.prevent="login">
       Login
     </button>
   </p>
@@ -50,7 +50,39 @@
 </template>
 
 <script>
+import session from "@/models/session";
+import users from "@/models/users";
+
 export default {
+
+  methods: {
+        login(){
+
+          var checkLogin = false;
+
+          for (var i = 0; i < users.userList.length; i++) {
+            if ( ( ( users.userList[i].user) == document.getElementById('username').value ) &&
+             ( ( users.userList[i].password) == document.getElementById('password').value ) )
+            {
+              session.user = {
+                user: users.userList[i].user,  
+                name: users.userList[i].name,
+                email: users.userList[i].email,
+                password: users.userList[i].password,
+                image: users.userList[i].image
+              }
+              session.addNotification('You are now logged in as: ' + session.user.user + '.', 'success')
+              this.$router.push('/')
+              checkLogin = true;
+            }
+          }
+
+          if (checkLogin == false){
+            alert('error: invalid credentials\n\n' + "(see models/users.js for admin; \notherwise, click Sign up to make a new account)");
+          }
+        
+        }
+    }
 
 }
 </script>
