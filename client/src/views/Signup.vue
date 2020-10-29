@@ -17,10 +17,7 @@
   <p class="control has-icons-left has-icons-right">
     <input class="input" type="username" id="username" placeholder="Username">
     <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
+      <i class="fas fa-user"></i>
     </span>
   </p>
 </div>
@@ -29,7 +26,7 @@
   <p class="control has-icons-left">
     <input class="input" type="fname" id="fname" placeholder="First Name">
     <span class="icon is-small is-left">
-      <i class="fas fa-lock"></i>
+      <i class="fas fa-user"></i>
     </span>
   </p>
 </div>
@@ -38,7 +35,7 @@
   <p class="control has-icons-left">
     <input class="input" type="lname" id="lname" placeholder="Last Name">
     <span class="icon is-small is-left">
-      <i class="fas fa-lock"></i>
+      <i class="fas fa-user"></i>
     </span>
   </p>
 </div>
@@ -47,7 +44,7 @@
   <p class="control has-icons-left">
     <input class="input" type="email" id="email" placeholder="Email Address">
     <span class="icon is-small is-left">
-      <i class="fas fa-lock"></i>
+      <i class="fas fa-envelope"></i>
     </span>
   </p>
 </div>
@@ -106,7 +103,7 @@ export default {
         }
 
         if(document.getElementById("password").value != document.getElementById("password-confirm").value ){
-          alert("error: passwords do not match");
+          session.addNotification("Error: passwords do not match", 'danger');
         }
         else if((document.getElementById("username").value == "") ||
         (document.getElementById("fname").value == "") ||
@@ -115,16 +112,16 @@ export default {
         (document.getElementById("password").value == "") ||
         (document.getElementById("password-confirm").value == "") 
         ){
-          alert("error: check inputs");
+          session.addNotification("Error: check inputs", 'danger');
         }
         else if(checkUsername == true){
-          alert("error: username is taken");
+          session.addNotification("Error: username is taken", 'danger');
         }
         else{
         
           users.addUser(document.getElementById("username").value, document.getElementById("fname").value + " " + document.getElementById("lname").value,
           document.getElementById("email").value, document.getElementById("password").value, 
-          "https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg")
+          "https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg", [])
 
           session.addNotification('Successfuly created user: ' + document.getElementById("username").value + '.', 'success')
           this.$router.push('login')

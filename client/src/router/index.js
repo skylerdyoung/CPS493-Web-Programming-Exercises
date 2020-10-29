@@ -77,7 +77,7 @@ function checkSessionUserAdmin (to, from, next) {
       next();
     }
     else{
-     alert("error: permission denied\n" + "(see models/users.js for admin)");
+      session.addNotification("Error: permission denied (see models/users.js for admin)", 'danger');
     }
   }else{
     next('Login');

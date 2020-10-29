@@ -17,10 +17,7 @@
   <p class="control has-icons-left has-icons-right">
     <input class="input" type="username" id="username" placeholder="Username">
     <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
+      <i class="fas fa-user"></i>
     </span>
   </p>
 </div>
@@ -64,12 +61,15 @@ export default {
             if ( ( ( users.userList[i].user) == document.getElementById('username').value ) &&
              ( ( users.userList[i].password) == document.getElementById('password').value ) )
             {
+              session.user = null;
+
               session.user = {
                 user: users.userList[i].user,  
                 name: users.userList[i].name,
                 email: users.userList[i].email,
                 password: users.userList[i].password,
-                image: users.userList[i].image
+                image: users.userList[i].image,
+                exercises: users.userList[i].exercises
               }
               session.addNotification('You are now logged in as: ' + session.user.user + '.', 'success')
               this.$router.push('/')
@@ -78,7 +78,7 @@ export default {
           }
 
           if (checkLogin == false){
-            alert('error: invalid credentials\n\n' + "(see models/users.js for admin; \notherwise, click Sign up to make a new account)");
+            session.addNotification("Error: invalid credentials (see models/users.js for admin; otherwise, click Sign up to make a new account)", 'danger')
           }
         
         }

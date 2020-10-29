@@ -10,7 +10,7 @@
 
     <Nav />
 
-     <Notifications /> 
+    <Notifications /> 
 
     <router-view/>
   </div>
