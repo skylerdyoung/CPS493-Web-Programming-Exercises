@@ -1,6 +1,5 @@
 <template>
   <div class="adduser" id="adduserbox">
-
       
     <article class="message is-link" id="sub-box" >
   

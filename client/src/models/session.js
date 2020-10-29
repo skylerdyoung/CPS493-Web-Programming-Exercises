@@ -1,5 +1,6 @@
 const session = {
     user: null,
+    miscVar: null,
     notifications: [],
     addNotification(text, type='info'){
         this.notifications.push({text, type})

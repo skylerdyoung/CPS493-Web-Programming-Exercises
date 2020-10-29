@@ -9,12 +9,12 @@
 
             <footer class="card-footer">
               <span class="card-footer-item">
-                  <a href="#"  @click.prevent="incrementExercise(i)" >Increase by  </a> 
+                  <a href="#" >Increase by  </a> 
                     
                     <div style="padding-left: 5px;" class="dropdown is-hoverable">
                     <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-                        <span id="type">5%</span>
+                        <span id="type">%</span>
                         <span class="icon is-small">
                             <i class="fas fa-angle-down" aria-hidden="true"></i>
                         </span>
@@ -23,22 +23,22 @@
                     <div class="dropdown-menu" id="dropdown-menu" role="menu">
                         <div class="dropdown-content">
                         <div class="dropdown-item">
-                            <a href="#" @click.prevent="fiveSelect()" class="dropdown-item">
+                            <a href="#" @click.prevent="incrementExercise(i,5)" class="dropdown-item">
                             5%
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="#" @click.prevent="tenSelect()" class="dropdown-item">
+                            <a href="#" @click.prevent="incrementExercise(i, 10)" class="dropdown-item">
                             10%
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="#" @click.prevent="twentySelect()" class="dropdown-item">
+                            <a href="#" @click.prevent="incrementExercise(i, 20)" class="dropdown-item">
                             20%
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="#" @click.prevent="fiftySelect()" class="dropdown-item">
+                            <a href="#" @click.prevent="incrementExercise(i, 50)" class="dropdown-item">
                             50%
                             </a>
                         </div>
@@ -78,23 +78,12 @@ export default {
             }
 
         },
-       incrementExercise(i){
+       incrementExercise(i, num){
             
             for (var j = 0; j < users.userList.length; j++) {
 
                 if(users.userList[j].user == this.user.user){
-                    if (document.getElementById('type').innerHTML =="5%"){
-                        users.userList[j].exercises[i].progress += 5;
-                    }
-                    else if (document.getElementById('type').innerHTML =="10%"){
-                        users.userList[j].exercises[i].progress += 10;
-                    }
-                    else if (document.getElementById('type').innerHTML =="20%"){
-                        users.userList[j].exercises[i].progress += 20;
-                    }
-                    else if (document.getElementById('type').innerHTML =="50%"){
-                        users.userList[j].exercises[i].progress += 50;
-                    }
+                        users.userList[j].exercises[i].progress += num;
                 }
             }
 

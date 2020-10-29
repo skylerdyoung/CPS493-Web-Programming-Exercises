@@ -21,7 +21,8 @@
               :i="j" 
             />
 
-            <footer class="card-footer">           
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item" @click="editUser(i)">Edit User</a>     
               <a href="#" class="card-footer-item" @click="deleteUser(i)">Delete User</a>
             </footer>
           
@@ -54,7 +55,19 @@ export default {
           else{
             users.deleteUser(i);
           }
+        },
+        editUser(i){
+          if (i === 0){         
+            session.addNotification('Error: Cannot edit admin', 'danger')
+          }
+          else{
+            session.miscVar = i;
+            this.$router.push('edituser')
+      
+          }
+
         }
+
     },
     components: {
       ExerciseDisplay
