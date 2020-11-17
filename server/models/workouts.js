@@ -6,7 +6,7 @@ const Privacy_Levels = { HIDDEN: 0, ONLY_ME: 1, ONLY_FRIENDS: 2, PUBLIC: 4 };
 
 async function getAll(){
     console.log("Called Get All")
-    const sql = `SELECT P.*, FirstName, LastName FROM ${PREFIX}Workouts P Join ${PREFIX}Users U ON P.Owner_id = U.id`
+    const sql = `SELECT P.* FROM ${PREFIX}Workouts P Join ${PREFIX}Users U ON P.Owner_id = U.id`
     return await mysql.query(sql);
 }
 
@@ -15,7 +15,7 @@ async function get(id){
         *
     FROM ${PREFIX}Workouts WHERE id=?`;
     const rows = await mysql.query(sql, [id]);
-    if(!rows.length) throw { status: 404, message: "Sorry, there is no such post" };
+    if(!rows.length) throw { status: 404, message: "Sorry, there is no such workout" };
     return rows[0];
 }
 
@@ -23,16 +23,16 @@ async function getTypes(){
     return await mysql.query(`SELECT id, Name FROM ${PREFIX}Types WHERE Type_id = 3`);
 }
 
-async function add(URL, Text, Media_Type, Privacy_Setting, Owner_id){
+async function add(Distance, Note, Exercise_type, Privacy_Setting, Owner_id){
     const sql = `INSERT INTO ${PREFIX}Workouts (created_at, URL, Text, Media_Type, Privacy_Setting, Owner_id) VALUES ? ;`;
-    const params = [[new Date(), URL, Text, Media_Type, Privacy_Setting, Owner_id]];
+    const params = [[new Date(), Distance, Note, Exercise_type, Privacy_Setting, Owner_id]];
     const res = await mysql.query(sql, [params]);
     return get(res.insertId);
 }
 
-async function update(id, URL, Text, Media_Type, Privacy_Setting, Owner_id){
+async function update(id, Distance, Note, Exercise_type, Privacy_Setting, Owner_id){
     const sql = `UPDATE ${PREFIX}Workouts SET ? WHERE id = ?;`;
-    const params = { URL, Text, Media_Type, Privacy_Setting, Owner_id };
+    const params = { Distance, Note, Exercise_type, Privacy_Setting, Owner_id };
     const res = await mysql.query(sql, [params]);
     return get(res.insertId);
 }

@@ -38,9 +38,9 @@ router
     })
     .post('/', (req, res, next) => {
         workouts.add(
-            req.body.URL,
-            req.body.Text, 
-            req.body.Media_Type, 
+            req.body.Distance,
+            req.body.Note, 
+            req.body.Exercise_Type, 
             req.body.Privacy_Setting , 
             req.body.Owner_id, 
         ).then(newUser => {
@@ -49,9 +49,9 @@ router
     })
    .put('/:id', (req, res, next) => {
         workouts.update( req.params.id,
-            req.body.URL,
-            req.body.Text, 
-            req.body.Media_Type, 
+            req.body.Distance,
+            req.body.Note, 
+            req.body.Exercise_Type, 
             req.body.Privacy_Setting , 
             req.body.Owner_id, 
         ).then(newUser => {

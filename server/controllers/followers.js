@@ -20,22 +20,18 @@ router
     })
     .post('/', (req, res, next) => {
         followers.add(
-            req.body.URL,
-            req.body.Text, 
-            req.body.Media_Type, 
-            req.body.Privacy_Setting , 
+            req.body.Follower_id, 
             req.body.Following_id, 
+            req.body.isAccepted, 
         ).then(newUser => {
             res.send( newUser );
         }).catch(next)
     })
    .put('/:id', (req, res, next) => {
         followers.update( req.params.id,
-            req.body.URL,
-            req.body.Text, 
-            req.body.Media_Type, 
-            req.body.Privacy_Setting , 
+            req.body.Follower_id, 
             req.body.Following_id, 
+            req.body.isAccepted, 
         ).then(newUser => {
             res.send( newUser );
         }).catch(next)
