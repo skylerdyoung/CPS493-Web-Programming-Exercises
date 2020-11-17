@@ -8,9 +8,9 @@ async function getAll(){
     return await mysql.query(sql);
 }
 
-async function getForPost(post_id){
-    const sql = `SELECT P.*, FirstName, LastName FROM ${PREFIX}Comments P Join ${PREFIX}Users U ON P.Owner_id = U.id WHERE P.Post_id = ?`
-    return await mysql.query(sql, [post_id]);
+async function getForWorkout(workout_id){
+    const sql = `SELECT P.*, FirstName, LastName FROM ${PREFIX}Comments P Join ${PREFIX}Users U ON P.Owner_id = U.id WHERE P.Workout_id = ?`
+    return await mysql.query(sql, [workout_id]);
 }
 
 async function get(id){
@@ -22,16 +22,16 @@ async function get(id){
     return rows[0];
 }
 
-async function add( Text, Post_id, Owner_id){
-    const sql = `INSERT INTO ${PREFIX}Comments (created_at, Text, Post_id, Owner_id) VALUES ? ;`;
-    const params = [[new Date(), Text, Post_id, Owner_id]];
+async function add( Text, Workout_id, Owner_id){
+    const sql = `INSERT INTO ${PREFIX}Comments (created_at, Text, Workout_id, Owner_id) VALUES ? ;`;
+    const params = [[new Date(), Text, Workout_id, Owner_id]];
     const res = await mysql.query(sql, [params]);
     return get(res.insertId);
 }
 
-async function update(id, Text, Post_id, Owner_id){
+async function update(id, Text, Workout_id, Owner_id){
     const sql = `UPDATE ${PREFIX}Comments SET ? WHERE id = ?;`;
-    const params = { Text, Post_id, Owner_id };
+    const params = { Text, Workout_id, Owner_id };
     const res = await mysql.query(sql, [params, id]);
     return get(res.insertId);
 }
@@ -41,6 +41,6 @@ async function remove(id){
     return await mysql.query(sql, [id]);
 }
 
-const search = async q => await mysql.query(`SELECT id, Text, Post_id FROM ${PREFIX}Comments WHERE Text LIKE ? ; `, [`%${q}%`]);
+const search = async q => await mysql.query(`SELECT id, Text, Workout_id FROM ${PREFIX}Comments WHERE Text LIKE ? ; `, [`%${q}%`]);
 
-module.exports = { getAll, get, add, update, remove, search, getForPost }
+module.exports = { getAll, get, add, update, remove, search, getForWorkout }

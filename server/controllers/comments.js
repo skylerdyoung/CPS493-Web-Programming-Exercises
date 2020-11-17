@@ -21,7 +21,7 @@ router
     .post('/', (req, res, next) => {
         comments.add(
             req.body.Text, 
-            req.body.Post_id, 
+            req.body.Workout_id, 
             req.body.Owner_id, 
         ).then(newUser => {
             res.send( newUser );
@@ -30,7 +30,7 @@ router
    .put('/:id', (req, res, next) => {
         comments.update( req.params.id,
             req.body.Text, 
-            req.body.Post_id, 
+            req.body.Workout_id, 
             req.body.Owner_id, 
         ).then(newUser => {
             res.send( newUser );

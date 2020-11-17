@@ -1,5 +1,5 @@
 const express = require('express');
-const posts = require('../models/posts');
+const workouts = require('../models/workouts');
 const comments = require('../models/comments');
 const reactions = require('../models/reactions');
 
@@ -7,37 +7,37 @@ const router = express.Router();
 
 router
     .get('/', (req, res, next) => {
-        posts.getAll().then(x=> res.send( x ) ) 
+        workouts.getAll().then(x=> res.send( x ) ) 
         .catch(next);
     })
     .get('/:id', (req, res, next) => {
         const id = +req.params.id;
         if(!id) return next();
-        posts.get(id).then(x=> res.send( x ) )
+        workouts.get(id).then(x=> res.send( x ) )
         .catch(next);
     })
     .get('/:id/comments', (req, res, next) => {
         const id = +req.params.id;
         if(!id) return next();
-        comments.getForPost(id).then(x=> res.send( x ) )
+        comments.getForWorkout(id).then(x=> res.send( x ) )
         .catch(next);
     })
     .get('/:id/reactions', (req, res, next) => {
         const id = +req.params.id;
         if(!id) return next();
-        reactions.getForPost(id).then(x=> res.send( x ) )
+        reactions.getForWorkout(id).then(x=> res.send( x ) )
         .catch(next);
     })
     .get('/types', (req, res, next) => {
-        posts.getTypes().then(x=> res.send( x ) )
+        workouts.getTypes().then(x=> res.send( x ) )
         .catch(next);
     })
     .get('/search', (req, res, next) => {
-        posts.search(req.query.q).then(x=> res.send( x ) )
+        workouts.search(req.query.q).then(x=> res.send( x ) )
         .catch(next);
     })
     .post('/', (req, res, next) => {
-        posts.add(
+        workouts.add(
             req.body.URL,
             req.body.Text, 
             req.body.Media_Type, 
@@ -48,7 +48,7 @@ router
         }).catch(next)
     })
    .put('/:id', (req, res, next) => {
-        posts.update( req.params.id,
+        workouts.update( req.params.id,
             req.body.URL,
             req.body.Text, 
             req.body.Media_Type, 
@@ -59,7 +59,7 @@ router
         }).catch(next)
     })
     .delete('/:id', (req, res, next) => {
-        posts.remove(req.params.id).then(msg => {
+        workouts.remove(req.params.id).then(msg => {
             res.send( msg );
         }).catch(next)
     })

@@ -5,18 +5,20 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 const users = require('./controllers/users');
-const posts = require('./controllers/posts');
+const workouts = require('./controllers/workouts');
 const comments = require('./controllers/comments');
 const reactions = require('./controllers/reactions');
+const followers = require('./controllers/followers');
 
 console.log(process.env.BEST_CLASS);
 
 app.use(express.json());
 
 app.use('/users', users);
-app.use('/posts', posts);
+app.use('/workouts', workouts);
 app.use('/comments', comments);
 app.use('/reactions', reactions);
+app.use('/followers', followers);
 
 app.use( (err, req, res, next) =>{
     console.log(err);
@@ -24,9 +26,9 @@ app.use( (err, req, res, next) =>{
 } )
 
 
-app.get('/hello', (req, res, next) => {
-    res.send('Hello Hudson Valley! You requested ' + req.url)
-  })
+app.get('/', (req, res, next) => {
+    res.send('Welcome to 2020 Web Programming App: Flexercise (Working Title)')
+})
 
 
 
