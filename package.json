@@ -1,0 +1,29 @@
+{
+  "name": "cps493-web-programming-exercises",
+  "scripts": {
+    "dev": "nodemon --watch server server/index.js",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skylerdyoung/CPS493-Web-Programming-Exercises.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "mysql": "^2.18.1",
+    "express": "^4.17.1",
+    "dotenv": "^8.2.0"
+  },
+  "description": "",
+  "bugs": {
+    "url": "https://github.com/skylerdyoung/CPS493-Web-Programming-Exercises/issues"
+  },
+  "homepage": "https://github.com/skylerdyoung/CPS493-Web-Programming-Exercises#readme",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "author": ""
+}
