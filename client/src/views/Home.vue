@@ -5,12 +5,39 @@
     <article class="message is-link" id="sub-box" >
   
       <div class="message-header">
-        <p>User</p>
+        <p>You</p>
       </div>
 
       <HomeDisplay />
 
     </article>
+
+    <article class="message is-link" id="sub-box" >
+  
+      <div class="message-header">
+        <p>Users</p>
+      </div>
+
+      <div class="message-body">
+
+        <div class="card">
+
+          <div class="card-content">
+
+              <UserDisplay v-for="(user,i) in users.userList" 
+                :key="user"
+                :user="user"
+                :i="i" 
+                />
+
+          </div>
+
+        </div>   
+
+      </div>
+
+    </article>
+
 
   </div>
 
@@ -20,15 +47,21 @@
 
 
   import HomeDisplay from "@/components/HomeDisplay";
+  import UserDisplay from "@/components/UserDisplay";
+  import users from "@/models/users";
 
+  export default {
+    data() {
+      return{
+        users
+      }
+    },
+    components: {
+      HomeDisplay, UserDisplay
+    }
 
-export default {
-
-  components: {
-    HomeDisplay
   }
 
-}
 </script>
 
 <style>

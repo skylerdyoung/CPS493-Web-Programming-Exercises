@@ -93,7 +93,7 @@ export default {
   data(){
     return{
       title: '',
-      type: ''
+      type: 'Weightlifting'
     }
   },
   methods:{
