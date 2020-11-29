@@ -16,7 +16,7 @@
 
         <h4>Exercise Title:</h4>
 
-        <input class="input" type="text" id="title" placeholder="Enter a Title">
+        <input v-model="title" class="input" type="text" id="title" placeholder="Enter a Title">
 
         <br><br>
 
@@ -25,7 +25,7 @@
         <div class="dropdown is-hoverable">
           <div class="dropdown-trigger">
             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-              <span id="type">Weightlifting</span>
+              <div :value="type"> {{ this.type }} </div>
               <span class="icon is-small">
                 <i class="fas fa-angle-down" aria-hidden="true"></i>
               </span>
@@ -34,22 +34,22 @@
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
               <div class="dropdown-item">
-                <a href="#" @click.prevent="weightSelect()" class="dropdown-item">
+                <a href="#" @click.prevent="exerciseSelect('Weightlifting')" class="dropdown-item">
                   Weightlifting
                 </a>
               </div>
               <div class="dropdown-item">
-                <a href="#" @click.prevent="cardioSelect()" class="dropdown-item">
+                <a href="#" @click.prevent="exerciseSelect('Cardio')" class="dropdown-item">
                   Cardio
                 </a>
               </div>
               <div class="dropdown-item">
-                <a href="#" @click.prevent="hybridSelect()" class="dropdown-item">
+                <a href="#" @click.prevent="exerciseSelect('Hybrid Method')" class="dropdown-item">
                   Hybrid Method
                 </a>
               </div>
               <div class="dropdown-item">
-                <a href="#" @click.prevent="otherSelect()" class="dropdown-item">
+                <a href="#" @click.prevent="exerciseSelect('Other')" class="dropdown-item">
                   Other
                 </a>
               </div>
@@ -90,8 +90,12 @@ import users from "@/models/users";
 
 export default {
 
-
-  
+  data(){
+    return{
+      title: '',
+      type: ''
+    }
+  },
   methods:{
     addExercise(){
 
@@ -99,7 +103,7 @@ export default {
 
         if(users.userList[i].user === session.user.user){
 
-          users.userList[i].exercises.push({title: document.getElementById('title').value,type: document.getElementById('type').innerHTML,
+          users.userList[i].exercises.push({title: this.title, type: this.type,
           progress: 0})
 
         }
@@ -108,21 +112,10 @@ export default {
 
       }
     },
-    weightSelect(){
-      document.getElementById('type').innerHTML ="Weightlifting";
+    exerciseSelect(exerciseType){
+      this.type = exerciseType;
 
     },
-    cardioSelect(){
-      document.getElementById('type').innerHTML ="Cardio";
-
-    },
-    hybridSelect(){
-      document.getElementById('type').innerHTML ="Hybrid Method";
-
-    },
-    otherSelect(){
-      document.getElementById('type').innerHTML ="Other";
-    }
   }
 }
 </script>

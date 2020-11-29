@@ -35,7 +35,8 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: checkLogin
   },
   {
     path: '/signup',
@@ -73,6 +74,17 @@ function checkSessionUser (to, from, next) {
     next();
   }else{
     next('Login');
+  }
+}
+
+
+function checkLogin(to, from, next) {
+  if(session.user == null){
+    next();
+  }else{
+    session.addNotification("You are now logged out." , 'danger');
+    session.user = null;
+    next();
   }
 }
 

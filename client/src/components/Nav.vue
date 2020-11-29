@@ -22,8 +22,11 @@
           <router-link to="/signup" class="button is-info">
             <strong>Sign up</strong>
           </router-link>
-          <router-link to='/login' class='button is-light'>
-            Log in
+          <router-link to='/login' v-if="session.user != null"  class='button is-light'>
+            Log Out
+          </router-link>
+          <router-link to='/login' v-else class='button is-info'>
+            <strong>Log In</strong>
           </router-link>
         </div>
       </div>
@@ -34,10 +37,23 @@
 
 <script>
 
+  import session from '@/models/session'
 
-export default {
+  export default {
 
-}
+
+    data() {
+      return{
+        session
+      }
+    },
+    methods: {
+
+    },
+
+  }
+
+
 </script>
 
   

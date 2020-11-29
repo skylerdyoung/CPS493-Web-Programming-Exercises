@@ -15,7 +15,7 @@
     <div class="login" >
     <div class="field">
   <p class="control has-icons-left has-icons-right">
-    <input class="input" type="username" id="username" placeholder="Username">
+    <input class="input" type="username" v-model="username" placeholder="Username">
     <span class="icon is-small is-left">
       <i class="fas fa-user"></i>
     </span>
@@ -23,7 +23,7 @@
 </div>
 <div class="field">
   <p class="control has-icons-left">
-    <input class="input" type="password" id="password" placeholder="Password">
+    <input class="input" type="password" v-model="password" placeholder="Password">
     <span class="icon is-small is-left">
       <i class="fas fa-lock"></i>
     </span>
@@ -52,14 +52,20 @@ import users from "@/models/users";
 
 export default {
 
+  data() {
+    return{
+      username: '',
+      password: ''
+    }
+  },
   methods: {
         login(){
 
           var checkLogin = false;
 
           for (var i = 0; i < users.userList.length; i++) {
-            if ( ( ( users.userList[i].user) == document.getElementById('username').value ) &&
-             ( ( users.userList[i].password) == document.getElementById('password').value ) )
+            if ( ( ( users.userList[i].user) == this.username ) &&
+             ( ( users.userList[i].password) == this.password ) )
             {
               session.user = null;
 

@@ -19,7 +19,7 @@
 
           <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="username" id="username" placeholder="Edit Username">
+            <input class="input" type="username" v-model="username" placeholder="Edit Username">
               <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
               </span>
@@ -30,7 +30,7 @@
 
            <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="fname" id="name" placeholder="Edit Name">
+            <input class="input" type="fname" v-model="name" placeholder="Edit Name">
               <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
               </span>
@@ -41,7 +41,7 @@
 
            <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="email" id="email" placeholder="Edit Email Address">
+            <input class="input" type="email" v-model="email" placeholder="Edit Email Address">
               <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
               </span>
@@ -52,7 +52,7 @@
 
           <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="password" id="password" placeholder="Edit Password">
+            <input class="input" type="password" v-model="password" placeholder="Edit Password">
               <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
               </span>
@@ -98,25 +98,29 @@
     export default {
     data() {
       return{
-        users,session
+        users,session,
+        username: '',
+        name: '',
+        email: '',
+        password: ''
       }
     },
     methods:{
         editInfo(){
-            if(document.getElementById('username').value != ""){
-                users.userList[session.miscVar].user = document.getElementById('username').value;
+            if(this.username != ""){
+                users.userList[session.miscVar].user = this.username;
             }
 
-            if(document.getElementById('name').value != ""){
-                users.userList[session.miscVar].name = document.getElementById('name').value;
+            if(this.name != ""){
+                users.userList[session.miscVar].name = this.name;
             }
 
-            if(document.getElementById('email').value != ""){
-                users.userList[session.miscVar].email = document.getElementById('email').value;
+            if(this.email != ""){
+                users.userList[session.miscVar].email = this.email;
             }
 
-            if(document.getElementById('password').value != ""){
-                users.userList[session.miscVar].password = document.getElementById('password').value;
+            if(this.password != ""){
+                users.userList[session.miscVar].password = this.password;
             }
         },
         adminRemoteLogin(){

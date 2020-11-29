@@ -11,7 +11,7 @@
 
           <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="username" id="username" placeholder="Username">
+            <input class="input" type="username" v-model="username" placeholder="Username">
               <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
               </span>
@@ -20,7 +20,7 @@
 
            <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="fname" id="fname" placeholder="First Name">
+            <input class="input" type="fname" v-model="fname" placeholder="First Name">
               <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
               </span>
@@ -30,7 +30,7 @@
 
            <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="lname" id="lname" placeholder="Last Name">
+            <input class="input" type="lname" v-model="lname" placeholder="Last Name">
               <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
               </span>
@@ -39,7 +39,7 @@
 
            <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="email" id="email" placeholder="Email Address">
+            <input class="input" type="email" v-model="email" placeholder="Email Address">
               <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
               </span>
@@ -49,7 +49,7 @@
 
           <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="password" id="password" placeholder="Password">
+            <input class="input" type="password" v-model="password" placeholder="Password">
               <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
               </span>
@@ -80,23 +80,32 @@ import users from "@/models/users";
 import session from "@/models/session";
 
 export default {
+  data() {
+    return{
+      username:'',
+      fname: '',
+      lname: '',
+      email: '',
+      password: ''
+    }
+  },
   methods:{
     signup(){
 
         var checkUsername= false;
 
         for (var i = 0; i < users.userList.length; i++) {
-            if ( ( users.userList[i].user) == document.getElementById('username').value )
+            if ( ( users.userList[i].user) == this.username )
             {
               checkUsername = true;
             }
         }
 
-        if((document.getElementById("username").value == "") ||
-        (document.getElementById("fname").value == "") ||
-        (document.getElementById("lname").value == "") ||
-        (document.getElementById("email").value == "") ||
-        (document.getElementById("password").value == "")) {
+        if((this.username == "") ||
+        (this.fname == "") ||
+        (this.lname == "") ||
+        (this.email == "") ||
+        (this.password == "")) {
           session.addNotification("Error: check inputs", 'danger');
         }
         else if(checkUsername == true){
@@ -104,11 +113,11 @@ export default {
         }
         else{
         
-          users.addUser(document.getElementById("username").value, document.getElementById("fname").value + " " + document.getElementById("lname").value,
-          document.getElementById("email").value, document.getElementById("password").value, 
+          users.addUser(this.username, this.fname + " " + this.lname,
+          this.email, this.password, 
           "https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg", [])
 
-          session.addNotification('Successfuly created user: ' + document.getElementById("username").value + '.', 'success')
+          session.addNotification('Successfuly created user: ' + this.username + '.', 'success')
           this.$router.push('userspage')
 
         }
