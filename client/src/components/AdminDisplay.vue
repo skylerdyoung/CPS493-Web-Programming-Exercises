@@ -5,17 +5,17 @@
            <div class="media">
            <div class="media-left">
           <figure class="image is-48x48">
-          <img :src="user.image" alt="Placeholder image">
+          <img src="https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg" alt="Placeholder image">
           </figure>
           </div>
           <div class="media-content">
-           <p class="title is-6">{{user.name}}</p>
-           <p class="subtitle is-7">@{{user.user}}</p>
+           <p class="title is-6">{{user.FirstName}}</p>
+           <p class="subtitle is-7">@{{user.UserName}}</p>
           </div>
          </div>
 
             
-            <ExerciseDisplay v-for="(exercise,j) in users.userList[i].exercises"
+            <ExerciseDisplay v-for="(exercise,j) in this.list"
               :key="exercise"
               :exercise="exercise"
               :i="j" 
@@ -32,22 +32,25 @@
 
 <script>
 
-import users from "@/models/users";
-import session from "@/models/session";
+import { getListByID } from "@/models/workouts";
+//import session from "@/models/session";
 import ExerciseDisplay from '@/components/ExerciseDisplay'
 
 export default {
     data() {
       return{
-        users
+        list: []
       }
+    },
+    async created(){
+        this.list = await getListByID(this.user.id); 
     },
     props: {
         user: Object,
         i: Number
     },
     methods: {
-       deleteUser(i){
+    /*   deleteUser(i){
 
           if (i === 0){         
             session.addNotification('Error: Cannot delete admin', 'danger')
@@ -66,7 +69,7 @@ export default {
       
           }
 
-        }
+        }*/
 
     },
     components: {

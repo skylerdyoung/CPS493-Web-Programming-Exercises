@@ -12,7 +12,7 @@
           </figure>
           </div>
           <div class="media-content">
-           <p class="title is-4">{{session.user.name}}</p>
+           <p class="title is-4">{{session.user.fname}} {{session.user.lname}} </p>
            <p class="subtitle is-6">@{{session.user.user}}</p>
           </div>
          </div>
@@ -21,7 +21,7 @@
 
           </div>
 
-            <ExerciseDisplay v-for="(exercise,i) in session.user.exercises"
+            <ExerciseDisplay v-for="(exercise,i) in this.list"
               :key="exercise"
               :exercise="exercise"
               :i="i" 
@@ -38,11 +38,16 @@
 
 import session from "@/models/session";
 import ExerciseDisplay from "@/components/ExerciseDisplay"
+import { getList } from "@/models/workouts";
 
 export default {
     data: ()=> ({
-        session
+        session,
+        list: []
     }),
+    async created(){
+      this.list = await getList(); 
+    },
     components:{
         ExerciseDisplay
     }

@@ -15,7 +15,7 @@
     <div class="login" >
     <div class="field">
   <p class="control has-icons-left has-icons-right">
-    <input class="input" type="username" v-model="username" placeholder="Username">
+    <input class="input" type="email" v-model="user" placeholder="Username / Email Address">
     <span class="icon is-small is-left">
       <i class="fas fa-user"></i>
     </span>
@@ -48,49 +48,55 @@
 
 <script>
 import session from "@/models/session";
-import users from "@/models/users";
+import { getList } from "@/models/users";
 
 export default {
 
   data() {
     return{
-      username: '',
-      password: ''
+      user: '',
+      password: '',
+      list : []
     }
   },
+  async created(){
+      this.list = await getList(); 
+  },
   methods: {
-        login(){
+    login(){
 
-          var checkLogin = false;
+      var checkLogin = false;
 
-          for (var i = 0; i < users.userList.length; i++) {
-            if ( ( ( users.userList[i].user) == this.username ) &&
-             ( ( users.userList[i].password) == this.password ) )
-            {
-              session.user = null;
+      for (var i = 0; i < this.list.length; i++) {
+          if ( (this.list[i].Password == this.password) && 
+          (this.list[i].Email == this.user || this.list[i].UserName == this.user) ){
+            session.user = null;
 
-              session.user = {
-                user: users.userList[i].user,  
-                name: users.userList[i].name,
-                email: users.userList[i].email,
-                password: users.userList[i].password,
-                image: users.userList[i].image,
-                exercises: users.userList[i].exercises
-              }
-              session.addNotification('You are now logged in as: ' + session.user.user + '.', 'success')
-              this.$router.push('/')
-              checkLogin = true;
+            session.user = {
+              id: this.list[i].id,
+              user: this.list[i].UserName,
+              fname: this.list[i].FirstName,
+              lname: this.list[i].LastName,
+              email: this.list[i].Email,
+              password: this.list[i].Password,
+              image: 'https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg',
+              exercises: []
             }
+            session.addNotification('You are now logged in as: ' + session.user.user + '.', 'success')
+            this.$router.push('/')
+            checkLogin = true;
           }
+      }
 
-          if (checkLogin == false){
-            session.addNotification("Error: invalid credentials (see models/users.js for admin; otherwise, click Sign up to make a new account)", 'danger')
-          }
-        
-        }
+      if (checkLogin == false){
+        session.addNotification('Error: Invalid Credentials', 'danger')
+      }
+
     }
+  }
 
 }
+
 </script>
 
 <style>

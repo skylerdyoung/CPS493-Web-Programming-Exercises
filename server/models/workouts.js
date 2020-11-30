@@ -19,6 +19,15 @@ async function get(id){
     return rows[0];
 }
 
+async function getByOwner(id){
+    const sql = `SELECT 
+        *
+    FROM ${PREFIX}Workouts WHERE Owner_id=?`;
+    const rows = await mysql.query(sql, [id]);
+    if(!rows.length) throw { status: 404, message: "Sorry, there is no such workout" };
+    return rows;
+}
+
 async function getTypes(){
     return await mysql.query(`SELECT id, Name FROM ${PREFIX}Types WHERE Type_id = 3`);
 }
@@ -44,4 +53,4 @@ async function remove(id){
 
 const search = async q => await mysql.query(`SELECT id, URL, Text, Media_Type FROM ${PREFIX}Workouts WHERE Text LIKE ? ; `, [`%${q}%`]);
 
-module.exports = { getAll, get, add, update, remove, getTypes, search, MediaTypes, Privacy_Levels }
+module.exports = { getAll, getByOwner, get, add, update, remove, getTypes, search, MediaTypes, Privacy_Levels }

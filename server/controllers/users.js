@@ -1,3 +1,4 @@
+
 const express = require('express');
 const users = require('../models/users');
 
@@ -5,7 +6,7 @@ const router = express.Router();
 
 router
     .get('/', (req, res, next) => {
-        users.getAll().then(x=> res.send( x.map(user=> ({ ...user, Password: undefined}) ) ) )
+        users.getAll().then(x=> res.send( x.map(user=> ({ ...user}) ) ) )
         .catch(next);
     })
     .get('/:id', (req, res, next) => {
@@ -35,12 +36,12 @@ router
     })
     .post('/register', (req, res, next) => {
         users.register(
+            req.body.UserName, 
             req.body.FirstName,
-            req.body.LastName, 
-            req.body.DOB, 
+            req.body.LastName,
+            req.body.Email,  
             req.body.Password, 
             users.Types.USER,
-            req.body.Email 
         ).then(newUser => {
             res.send( { ...newUser, Password: undefined } );
         }).catch(next)

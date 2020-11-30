@@ -73,6 +73,7 @@ function checkSessionUser (to, from, next) {
   if(session.user){
     next();
   }else{
+    next();
     next('Login');
   }
 }

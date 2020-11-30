@@ -13,7 +13,7 @@
 
         <div class="card-content">
 
-            <Exercise v-for="(exercise,i) in session.user.exercises"
+            <Exercise v-for="(exercise,i) in this.list"
               :key="exercise"
               :user="session.user"
               :exercise="exercise"
@@ -41,13 +41,17 @@
 <script>
   import Exercise from '@/components/Exercise'
   import session from "@/models/session";
-  import users from "@/models/users"
+  import { getList } from "@/models/workouts";
 
 export default {
   data() {
       return{
-        session, users
+        session,
+        list: []
       }
+  },
+  async created(){
+      this.list = await getList(); 
   },
   components: {
     Exercise

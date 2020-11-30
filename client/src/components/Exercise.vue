@@ -3,9 +3,9 @@
             <div class="card">
             <div class="card-content">
 
-            <strong>{{exercise.title}}</strong>
-            <h3>Type: <i>{{exercise.type}}</i></h3>
-            <progress class="progress is-primary" :value="exercise.progress" max="100"></progress>
+            <strong>{{exercise.Exercise_Title}}</strong>
+            <h3>Type: <i>{{exercise.Exercise_Type}}</i></h3>
+            <progress class="progress is-primary" :value="exercise.Exercise_Progress" max="100"></progress>
 
             <footer class="card-footer">
               <span class="card-footer-item">
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import users from '@/models/users'
+//import users from '@/models/users'
     
 
 export default {
@@ -73,7 +73,7 @@ export default {
         i: Number
     },
     methods: {
-        deleteExercise(i){
+        /*deleteExercise(i){
             
             for (var j = 0; j < users.userList.length; j++) {
 
@@ -92,7 +92,7 @@ export default {
                 }
             }
 
-        },
+        },*/
         changeValue(newValue){
             this.value = newValue;
         }

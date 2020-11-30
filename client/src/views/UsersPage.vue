@@ -13,7 +13,7 @@
 
         <div class="card-content">
 
-            <AdminDisplay v-for="(user,i) in users.userList" 
+            <AdminDisplay v-for="(user,i) in this.list" 
               :key="user"
               :user="user"
               :i="i" 
@@ -39,15 +39,18 @@
 
 <script>
 
-  import users from "@/models/users";
+  import { getList } from "@/models/users";
   import AdminDisplay from "@/components/AdminDisplay"
 
 
   export default {
     data() {
       return{
-        users
+        list: []
       }
+    },
+    async created(){
+      this.list = await getList(); 
     },
     components: {
       AdminDisplay

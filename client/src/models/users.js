@@ -1,19 +1,8 @@
-const users = {
-    userList: [{ user:'admin', 
-    name: 'Admin', 
-    email: 'admin@flexercise.io',
-    password: 'admin1234', 
-    image: 'https://img.favpng.com/20/18/11/computer-icons-royalty-free-clip-art-png-favpng-ti3NyXiZCh3GGH3QG9tx9Qfhm.jpg',
-    exercises: []
-    }],
-    addUser(user, name, email, password, image, exercises){
-        this.userList.push({user, name, email, password, image, exercises})
-    },
-    deleteUser(i){
-        this.userList.splice(i, 1);
-    }
-    
-    
-};
+import { myFetch } from "./my-fetch";
 
-export default users;
+export function getList() {
+    return myFetch('users');
+}
+export function registerUser(username, firstname, lastname, email, password){
+    return myFetch('users/register', { UserName: username, FirstName: firstname, LastName: lastname, Email: email, Password: password, User_Type: 6 })
+}

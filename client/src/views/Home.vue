@@ -24,11 +24,11 @@
 
           <div class="card-content">
 
-              <UserDisplay v-for="(user,i) in users.userList" 
+              <UserDisplay v-for="(user,i) in this.list" 
                 :key="user"
                 :user="user"
                 :i="i" 
-                />
+              />
 
           </div>
 
@@ -48,13 +48,16 @@
 
   import HomeDisplay from "@/components/HomeDisplay";
   import UserDisplay from "@/components/UserDisplay";
-  import users from "@/models/users";
+  import { getList } from "@/models/users";
 
   export default {
     data() {
       return{
-        users
+        list: []
       }
+    },
+    async created(){
+        this.list = await getList(); 
     },
     components: {
       HomeDisplay, UserDisplay
