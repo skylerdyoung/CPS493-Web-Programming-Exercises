@@ -39,10 +39,10 @@ async function add(Owner_id, Privacy_Setting, Exercise_Title, Exercise_Type, Exe
     return get(res.insertId);
 }
 
-async function update(id, Distance, Note, Exercise_type, Privacy_Setting, Owner_id){
+async function update(id, Exercise_Progress){
     const sql = `UPDATE ${PREFIX}Workouts SET ? WHERE id = ?;`;
-    const params = { Distance, Note, Exercise_type, Privacy_Setting, Owner_id };
-    const res = await mysql.query(sql, [params]);
+    const params = { Exercise_Progress };
+    const res = await mysql.query(sql, [params, id]);
     return get(res.insertId);
 }
 

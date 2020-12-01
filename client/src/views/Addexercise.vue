@@ -99,6 +99,8 @@ export default {
   methods:{
     addThisExercise(){
       addWorkout( session.user.id, this.title, this.type, 0)
+
+      this.$router.push('exercises')
     },
     /*addExercise(){
 

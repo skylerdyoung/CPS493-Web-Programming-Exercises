@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div v-if="this.check == false" class="card">
             <div class="card">
             <div class="card-content">
 
@@ -9,7 +9,7 @@
 
             <footer class="card-footer">
               <span class="card-footer-item">
-                  <a @click.prevent="incrementExercise(i, 10)" href="#" >Increase by  </a> 
+                  <a @click.prevent="incrementThisExercise()" href="#" >Increase by  </a> 
                     
                     <div style="padding-left: 5px;" class="dropdown is-hoverable">
                     <div class="dropdown-trigger">
@@ -42,6 +42,11 @@
                             50%
                             </a>
                         </div>
+                        <div class="dropdown-item">
+                            <a href="#" name="amount" @click.prevent="changeValue(100)" class="dropdown-item">
+                            100%
+                            </a>
+                        </div>
                         </div>
                     </div>
                     </div>
@@ -49,7 +54,7 @@
                </span>
 
 
-              <a href="#" @click.prevent="deleteExercise(i)" class="card-footer-item">Delete</a>
+              <a href="#" @click.prevent="deleteThisExercise()" class="card-footer-item">Delete</a>
             </footer>
 
             </div>
@@ -59,12 +64,14 @@
 
 <script>
 //import users from '@/models/users'
-    
+import { deleteWorkout } from '@/models/workouts'
+import { updateWorkout } from '@/models/workouts'
 
 export default {
     data (){
         return{
             value: 5,
+            check: false
         }
     },
     props: {
@@ -73,6 +80,18 @@ export default {
         i: Number
     },
     methods: {
+        deleteThisExercise(){
+            deleteWorkout(this.exercise.id)
+            this.check = true;
+        },
+        incrementThisExercise(){
+            var tempVal = this.exercise.Exercise_Progress + this.value;
+
+            updateWorkout(this.exercise.id, tempVal);
+
+            this.$router.push('/')
+        },
+
         /*deleteExercise(i){
             
             for (var j = 0; j < users.userList.length; j++) {

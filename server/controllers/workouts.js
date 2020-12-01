@@ -42,6 +42,11 @@ router
         workouts.search(req.query.q).then(x=> res.send( x ) )
         .catch(next);
     })
+    .get('/delete/:id', (req, res, next) => {
+        workouts.remove(req.params.id).then(msg => {
+            res.send( msg );
+        }).catch(next)
+    })
     .post('/add', (req, res, next) => {
         workouts.add(
             req.body.Owner_id,
@@ -53,20 +58,12 @@ router
             res.send( newUser );
         }).catch(next)
     })
-   .put('/:id', (req, res, next) => {
+   .post('/update/:id', (req, res, next) => {
         workouts.update( req.params.id,
-            req.body.Distance,
-            req.body.Note, 
-            req.body.Exercise_Type, 
-            req.body.Privacy_Setting , 
-            req.body.Owner_id, 
+            req.body.Exercise_Progress
         ).then(newUser => {
             res.send( newUser );
         }).catch(next)
     })
-    .delete('/:id', (req, res, next) => {
-        workouts.remove(req.params.id).then(msg => {
-            res.send( msg );
-        }).catch(next)
-    })
+
 module.exports = router;
