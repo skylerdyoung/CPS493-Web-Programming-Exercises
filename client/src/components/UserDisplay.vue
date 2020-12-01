@@ -9,7 +9,7 @@
           </figure>
           </div>
           <div class="media-content">
-           <p class="title is-6">{{user.FirstName}}</p>
+           <p class="title is-6">{{user.FirstName}} {{user.LastName}}</p>
            <p class="subtitle is-7">@{{user.UserName}}</p>
           </div>
          </div>
