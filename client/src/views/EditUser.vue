@@ -11,11 +11,11 @@
 
           <div class="media-left" style="padding-bottom: 20px;">
           <figure class="image is-48x48">
-          <img :src="users.userList[session.miscVar].image">
+          <img src="https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg">
           </figure>
           </div>
 
-          <p class="paragraph is-6" style="text-align: left;">User: {{users.userList[session.miscVar].user}}</p>
+          <p class="paragraph is-6" style="text-align: left;">User: {{this.list.UserName}}</p>
 
           <div class="field">
             <p class="control has-icons-left">
@@ -26,18 +26,29 @@
             </p>
           </div>
            
-           <p class="paragraph is-6" style="text-align: left;">Name: {{users.userList[session.miscVar].name}}</p>
+           <p class="paragraph is-6" style="text-align: left;">First Name: {{this.list.FirstName}} </p>
 
            <div class="field">
             <p class="control has-icons-left">
-            <input class="input" type="fname" v-model="name" placeholder="Edit Name">
+            <input class="input" type="fname" v-model="fname" placeholder="Edit First Name">
               <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
               </span>
             </p>
           </div>
 
-          <p class="paragraph is-6" style="text-align: left;">Email: {{users.userList[session.miscVar].email}}</p>
+          <p class="paragraph is-6" style="text-align: left;">Last Name: {{this.list.LastName}} </p>
+
+           <div class="field">
+            <p class="control has-icons-left">
+            <input class="input" type="fname" v-model="lname" placeholder="Edit Last Name">
+              <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+              </span>
+            </p>
+          </div>
+
+          <p class="paragraph is-6" style="text-align: left;">Email: {{this.list.Email}} </p>
 
            <div class="field">
             <p class="control has-icons-left">
@@ -48,7 +59,7 @@
             </p>
           </div>
 
-          <p class="paragraph is-6" style="text-align: left;">Password: {{users.userList[session.miscVar].password}}</p>
+          <p class="paragraph is-6" style="text-align: left;">Password: {{this.list.Password}} </p>
 
           <div class="field">
             <p class="control has-icons-left">
@@ -93,46 +104,71 @@
 
 <script>
     import session from '@/models/session'
-    import users from '@/models/users'
+    import { getUser } from '@/models/users'
+    import { editUser } from '@/models/users'
 
     export default {
     data() {
       return{
-        users,session,
+        session,
         username: '',
-        name: '',
+        fname: '',
+        lname: '',
         email: '',
-        password: ''
+        password: '',
+        list: []
       }
+    },
+    async created(){
+      this.list = await getUser(session.miscVar); 
     },
     methods:{
         editInfo(){
-            if(this.username != ""){
-                users.userList[session.miscVar].user = this.username;
-            }
+          var tempusername = this.list.UserName;
+          var tempfirstname = this.list.FirstName;
+          var templastname = this.list.LastName;
+          var tempemail = this.list.Email;
+          var temppassword = this.list.Password;
 
-            if(this.name != ""){
-                users.userList[session.miscVar].name = this.name;
-            }
+          if (this.username != ''){
+            tempusername = this.username;
+          }
 
-            if(this.email != ""){
-                users.userList[session.miscVar].email = this.email;
-            }
+          if (this.fname != ''){
+            tempfirstname = this.fname;
+          }
 
-            if(this.password != ""){
-                users.userList[session.miscVar].password = this.password;
-            }
+          if (this.lname != ''){
+            templastname = this.lname;
+          }
+
+          if (this.email != ''){
+            tempemail = this.email;
+          }
+
+           if (this.password != ''){
+            temppassword = this.password;
+          }
+
+          editUser(this.list.id, tempusername, tempfirstname, templastname, tempemail, temppassword );
+          session.addNotification('Successfully edited user: ' + this.username + '.', 'success');
+          this.$router.push('userspage');
+
+
+            
         },
         adminRemoteLogin(){
             session.user = null;
 
             session.user = {
-                user: users.userList[session.miscVar].user,  
-                name: users.userList[session.miscVar].name,
-                email: users.userList[session.miscVar].email,
-                password: users.userList[session.miscVar].password,
-                image: users.userList[session.miscVar].image,
-                exercises: users.userList[session.miscVar].exercises
+                id: this.list.id,
+                user: this.list.UserName,  
+                fname: this.list.FirstName,
+                lname: this.list.LastName,
+                email: this.list.Email,
+                password: this.list.Password,
+                image: 'https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg',
+                exercises: []
             }
               session.addNotification('You are now logged in as: ' + session.user.user + '.', 'success')
               this.$router.push('/')

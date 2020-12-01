@@ -42,13 +42,13 @@ router
         workouts.search(req.query.q).then(x=> res.send( x ) )
         .catch(next);
     })
-    .post('/', (req, res, next) => {
+    .post('/add', (req, res, next) => {
         workouts.add(
-            req.body.Distance,
-            req.body.Note, 
+            req.body.Owner_id,
+            req.body.Privacy_Setting, 
+            req.body.Exercise_Title, 
             req.body.Exercise_Type, 
-            req.body.Privacy_Setting , 
-            req.body.Owner_id, 
+            req.body.Exercise_Progress, 
         ).then(newUser => {
             res.send( newUser );
         }).catch(next)

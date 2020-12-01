@@ -1,5 +1,5 @@
 <template>
-  <div class="card" id="adminuserpanel">
+  <div  v-if="user.UserName != null" class="card" id="adminuserpanel">
           <div class="card-content">
 
            <div class="media">
@@ -9,7 +9,7 @@
           </figure>
           </div>
           <div class="media-content">
-           <p class="title is-6">{{user.FirstName}}</p>
+           <p class="title is-6">{{user.FirstName}} {{user.LastName}}</p>
            <p class="subtitle is-7">@{{user.UserName}}</p>
           </div>
          </div>
@@ -22,8 +22,8 @@
             />
 
             <footer class="card-footer">
-              <a href="#" class="card-footer-item" @click="editUser(i)">Edit User</a>     
-              <a href="#" class="card-footer-item" @click="deleteUser(i)">Delete User</a>
+              <a href="#" class="card-footer-item" @click="editThisUser()">Edit User</a>     
+              <a href="#" class="card-footer-item" @click="deleteThisUser()">Delete User</a>
             </footer>
           
             </div>
@@ -33,7 +33,8 @@
 <script>
 
 import { getListByID } from "@/models/workouts";
-//import session from "@/models/session";
+import { deleteUser } from "@/models/users";
+import session from "@/models/session";
 import ExerciseDisplay from '@/components/ExerciseDisplay'
 
 export default {
@@ -50,6 +51,27 @@ export default {
         i: Number
     },
     methods: {
+      deleteThisUser(){
+        if (this.user.UserName === 'admin'){         
+            session.addNotification('Error: Cannot delete admin', 'danger')
+        }
+        else{
+          deleteUser(this.user.id);
+          session.addNotification('Successfully deleted user: ' + this.user.UserName + '.' , 'danger');
+          this.user.UserName = null;
+        }
+      },
+      editThisUser(){
+          if (this.user.UserName === 'admin'){         
+            session.addNotification('Error: Cannot edit admin', 'danger')
+          }
+          else{
+            session.miscVar = this.user.id;
+            this.$router.push('edituser')
+          }
+      }
+
+
     /*   deleteUser(i){
 
           if (i === 0){         

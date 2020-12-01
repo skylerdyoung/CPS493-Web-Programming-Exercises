@@ -31,9 +31,9 @@ async function add(Username, FirstName, LastName, Email, Password, User_Type){
     return await mysql.query(sql, [params]);
 }
 
-async function update(id, FirstName, LastName, DOB, Password, User_Type){
+async function update(id, UserName, FirstName, LastName, Email, Password, User_Type){
     const sql = `UPDATE ${PREFIX}Users SET ? WHERE id = ?;`;
-    const params = { FirstName, LastName, DOB: new Date(DOB), Password, User_Type };
+    const params = {UserName, FirstName, LastName, Email, Password, User_Type };
     return await mysql.query(sql, [params, id]);
 }
 

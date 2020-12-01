@@ -32,9 +32,9 @@ async function getTypes(){
     return await mysql.query(`SELECT id, Name FROM ${PREFIX}Types WHERE Type_id = 3`);
 }
 
-async function add(Distance, Note, Exercise_type, Privacy_Setting, Owner_id){
-    const sql = `INSERT INTO ${PREFIX}Workouts (created_at, URL, Text, Media_Type, Privacy_Setting, Owner_id) VALUES ? ;`;
-    const params = [[new Date(), Distance, Note, Exercise_type, Privacy_Setting, Owner_id]];
+async function add(Owner_id, Privacy_Setting, Exercise_Title, Exercise_Type, Exercise_Progress){
+    const sql = `INSERT INTO ${PREFIX}Workouts (created_at, Owner_id, Privacy_Setting, Exercise_Title, Exercise_Type, Exercise_Progress) VALUES ? ;`;
+    const params = [[new Date(), Owner_id, Privacy_Setting, Exercise_Title, Exercise_Type, Exercise_Progress]];
     const res = await mysql.query(sql, [params]);
     return get(res.insertId);
 }

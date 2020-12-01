@@ -76,7 +76,8 @@
 </template>
 
 <script>
-import users from "@/models/users";
+import { registerUser } from "@/models/users";
+import { getList } from "@/models/users";
 import session from "@/models/session";
 
 export default {
@@ -86,43 +87,67 @@ export default {
       fname: '',
       lname: '',
       email: '',
-      password: ''
+      password: '',
+      list: []
     }
   },
+  async created(){
+      this.list = await getList(); 
+  },
   methods:{
-    signup(){
-
-        var checkUsername= false;
-
-        for (var i = 0; i < users.userList.length; i++) {
-            if ( ( users.userList[i].user) == this.username )
-            {
-              checkUsername = true;
-            }
-        }
+    
+      signup(){
 
         if((this.username == "") ||
         (this.fname == "") ||
         (this.lname == "") ||
         (this.email == "") ||
-        (this.password == "")) {
-          session.addNotification("Error: check inputs", 'danger');
-        }
-        else if(checkUsername == true){
-          session.addNotification("Error: username is taken", 'danger');
+        (this.password == "") 
+        ){
+          session.addNotification("Error: Check inputs.", 'danger');
         }
         else{
-        
-          users.addUser(this.username, this.fname + " " + this.lname,
-          this.email, this.password, 
-          "https://img.favpng.com/3/4/13/computer-icons-businessperson-illustration-royalty-free-user-png-favpng-aPV2xdBz8URLdbXPua700bAhv.jpg", [])
 
-          session.addNotification('Successfuly created user: ' + this.username + '.', 'success')
-          this.$router.push('userspage')
+          var checkEmail = false;
+          var checkUser = false;
+
+          for (var i = 0; i < this.list.length; i++) {
+            if ( this.list[i].Email == this.email){
+                
+                checkEmail = true;
+
+            }
+            else if ( this.list[i].UserName == this.username){
+              
+              checkUser = true;
+
+            }
+          }
+
+          if (checkEmail == true){
+
+            session.addNotification('Error: An account associated with that email address already exists.', 'danger')
+
+          }
+          else if (checkUser == true){
+
+            session.addNotification('Error: An account associated with that username already exists.', 'danger')
+
+          }
+          else{
+
+            registerUser(this.username, this.fname, this.lname,
+            this.email, this.password)
+
+            session.addNotification('Successfully created user: ' + this.username + '.', 'success')
+            this.$router.push('userspage')
+
+          }
 
         }
 
       }
+
     }
   }
 

@@ -60,7 +60,7 @@
         <footer class="card-footer">
         
           <p class="card-footer-item">
-              <button class="button is-info" @click.prevent="addExercise">
+              <button class="button is-info" @click.prevent="addThisExercise()">
                 Submit
               </button>
           </p>
@@ -85,7 +85,7 @@
 
 <script>
 import session from "@/models/session";
-import users from "@/models/users";
+import { addWorkout } from "@/models/workouts";
 
 
 export default {
@@ -97,7 +97,10 @@ export default {
     }
   },
   methods:{
-    addExercise(){
+    addThisExercise(){
+      addWorkout( session.user.id, this.title, this.type, 0)
+    },
+    /*addExercise(){
 
       for (var i = 0; i < users.userList.length; i++) {
 
@@ -111,7 +114,7 @@ export default {
         this.$router.push('exercises')
 
       }
-    },
+    },*/
     exerciseSelect(exerciseType){
       this.type = exerciseType;
 

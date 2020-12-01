@@ -11,7 +11,6 @@
           <div class="media-content">
            <p class="title is-6">{{user.FirstName}}</p>
            <p class="subtitle is-7">@{{user.UserName}}</p>
-            <p class="subtitle is-7">@{{user.id}}</p>
           </div>
          </div>
 
@@ -48,6 +47,7 @@ export default {
         this.list = await getListByID(this.user.id); 
     },
     methods: {
+
        /*deleteUser(i){
 
           if (i === 0){         

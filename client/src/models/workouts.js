@@ -8,3 +8,7 @@ export function getList() {
 export function getListByID(id) {
     return myFetch('workouts/owner/' + id );
 }
+
+export function addWorkout(ownerid, exercisetitle, exercisetype, exerciseprogress) {
+    return myFetch('workouts/add' , {Owner_id: ownerid, Privacy_Setting: 4, Exercise_Title: exercisetitle, Exercise_Type: exercisetype, Exercise_Progress: exerciseprogress} );
+}
