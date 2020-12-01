@@ -1,5 +1,5 @@
 
-const API_ROOT = process.env.API_ROOT || 'http://localhost:3002/';
+const API_ROOT = process.env.API_ROOT;
 
 export function myFetch(url, data = null, method = 'POST'){
 
