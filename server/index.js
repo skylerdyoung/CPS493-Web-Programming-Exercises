@@ -34,7 +34,7 @@ app.use( (err, req, res, next) =>{
 
 
 app.get('/', (req, res, next) => {
-    res.send('Welcome to 2020 Web Programming App: Flexercise (Working Title)')
+    res.send('Welcome to 2020 Web Programming App: Flexercise (Working Title) TESTING')
 })
 
 
