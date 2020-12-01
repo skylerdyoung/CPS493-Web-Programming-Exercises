@@ -29,6 +29,12 @@ app.use('/comments', comments);
 app.use('/reactions', reactions);
 app.use('/followers', followers);
 
+app.get('*', (req, res, next) => {
+    const filename = path.join(__dirname, '/../docs/index.html');
+    console.log(filename);
+    res.sendFile( filename );
+})
+
 app.use( (err, req, res, next) =>{
     console.log(err);
     res.status(err.status || 500).send( { message: err.message } )
