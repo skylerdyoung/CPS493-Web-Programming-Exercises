@@ -24,6 +24,23 @@
 
           <div class="card-content">
 
+                <section>
+                  <b-field label="Search for User">
+                      <b-autocomplete
+                          rounded
+                          v-model="name"
+                          :data="filteredDataArray"
+                          placeholder="Type in User Here"
+                          icon="magnify"
+                          clearable
+                          @select="option => selected = option">
+                          <template slot="empty">No results found</template>
+                      </b-autocomplete>
+                  </b-field>
+                </section>
+
+              <br>
+
               <UserDisplay v-for="(user,i) in this.list" 
                 :key="user"
                 :user="user"
@@ -53,7 +70,9 @@
   export default {
     data() {
       return{
-        list: []
+        list: [],
+        name: '',
+        selected: null
       }
     },
     async created(){
@@ -61,6 +80,16 @@
     },
     components: {
       HomeDisplay, UserDisplay
+    },
+    computed: {
+        filteredDataArray() {
+            return this.list.filter((option) => {
+                return option
+                    .toString()
+                    .toLowerCase()
+                    .indexOf(this.name.toLowerCase()) >= 0
+            })
+        }
     }
 
   }
